@@ -74,10 +74,10 @@ static const CGFloat MarginLeft = 20.0f;
     self.scrollView.clipsToBounds = NO;
     [self addSubview:self.scrollView];
     
-    UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+    /*UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
     rotationGestureRecognizer.delegate = self;
     _rotationGestureRecognizer = rotationGestureRecognizer;
-    [self.scrollView addGestureRecognizer:rotationGestureRecognizer];
+    [self.scrollView addGestureRecognizer:rotationGestureRecognizer];*/
     
     self.cropRectView = [[PECropRectView alloc] init];
     self.cropRectView.delegate = self;
@@ -452,6 +452,7 @@ static const CGFloat MarginLeft = 20.0f;
     CGFloat height = CGRectGetHeight(toRect);
     
     CGFloat scale = MIN(CGRectGetWidth(self.editingRect) / width, CGRectGetHeight(self.editingRect) / height);
+    self.scrollView.minimumZoomScale = scale;
     
     CGFloat scaledWidth = width * scale;
     CGFloat scaledHeight = height * scale;
