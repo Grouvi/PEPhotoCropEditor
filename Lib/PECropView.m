@@ -33,6 +33,8 @@ static const CGFloat MarginLeft = 20.0f;
 @property (nonatomic, getter = isResizing) BOOL resizing;
 @property (nonatomic) UIInterfaceOrientation interfaceOrientation;
 
+@property (nonatomic) CGFloat initialScale;
+
 @end
 
 @implementation PECropView
@@ -452,7 +454,10 @@ static const CGFloat MarginLeft = 20.0f;
     CGFloat height = CGRectGetHeight(toRect);
     
     CGFloat scale = MIN(CGRectGetWidth(self.editingRect) / width, CGRectGetHeight(self.editingRect) / height);
-    self.scrollView.minimumZoomScale = scale;
+    if (self.initialScale == 0) {
+        self.initialScale = scale;
+        self.scrollView.minimumZoomScale = self.initialScale;
+    }
     
     CGFloat scaledWidth = width * scale;
     CGFloat scaledHeight = height * scale;
